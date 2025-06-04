@@ -21,14 +21,21 @@ steps:
       - |
         gcloud container clusters get-credentials ash-cluster --zone us-central1-a
 
-  # Deploy to GKE
+ # Step 4: Deploy Deployment to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
+    env:
+      - CLOUDSDK_COMPUTE_ZONE=us-central1-a
+      - CLOUDSDK_CONTAINER_CLUSTER=ash-cluster
     args:
       - apply
       - '-f'
       - k8s/deployment.yaml
 
+  # Step 5: Deploy Service to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
+    env:
+      - CLOUDSDK_COMPUTE_ZONE=us-central1-a
+      - CLOUDSDK_CONTAINER_CLUSTER=ash-cluster
     args:
       - apply
       - '-f'
