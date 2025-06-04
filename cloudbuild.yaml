@@ -19,7 +19,7 @@ steps:
     args:
       - '-c'
       - |
-        gcloud container clusters get-credentials hello-cluster --zone us-central1-a
+        gcloud container clusters get-credentials ash-cluster --zone us-central1-a
 
   # Deploy to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
