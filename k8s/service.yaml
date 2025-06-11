@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: hello-service
 spec:
-  type: LoadBalancer
   selector:
-    app: hello-app
+    app: hello
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP

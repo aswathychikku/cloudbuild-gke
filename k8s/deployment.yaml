@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app
+  name: hello-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-app
+      app: hello
   template:
     metadata:
       labels:
-        app: hello-app
+        app: hello
     spec:
       containers:
-      - name: hello-app
+      - name: hello
         image: us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA
         ports:
         - containerPort: 8080
+

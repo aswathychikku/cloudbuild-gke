@@ -4,24 +4,24 @@ steps:
     args:
       - build
       - '-t'
-      - us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA'
       - '.'
 
   # Push image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA'
 
-  # Set up kubectl (configure cluster access)
+  # Get GKE credentials securely
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
+    entrypoint: bash
     args:
-      - '-c'
+      - -c
       - |
         gcloud container clusters get-credentials ash-cluster --zone us-central1-a
 
- # Step 4: Deploy Deployment to GKE
+  # Deploy to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
     env:
       - CLOUDSDK_COMPUTE_ZONE=us-central1-a
@@ -29,17 +29,7 @@ steps:
     args:
       - apply
       - '-f'
-      - k8s/deployment.yaml
-
-  # Step 5: Deploy Service to GKE
-  - name: 'gcr.io/cloud-builders/kubectl'
-    env:
-      - CLOUDSDK_COMPUTE_ZONE=us-central1-a
-      - CLOUDSDK_CONTAINER_CLUSTER=ash-cluster
-    args:
-      - apply
-      - '-f'
-      - k8s/service.yaml
+      - k8s/
 
 images:
   - us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA
