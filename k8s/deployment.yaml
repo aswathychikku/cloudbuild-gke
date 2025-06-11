@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: us-central1-docker.pkg.dev/$PROJECT_ID/aswathy-docker-repo/hello-docker:$SHORT_SHA
+        image: us-central1-docker.pkg.dev/${PROJECT_ID}/aswathy-docker-repo/hello-docker:${SHORT_SHA}
         ports:
         - containerPort: 8080
 
